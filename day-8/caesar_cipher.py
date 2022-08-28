@@ -13,20 +13,23 @@ def get_input():
 def caesar(text, shift, direction):
     result = ""
     for letter in text:
-        idx_alphabet = alphabet.index(letter)
+        if letter in alphabet:
+            idx_alphabet = alphabet.index(letter)
 
-        if direction == 'encode':
+        if direction == 'encode' and (letter in alphabet):
             if idx_alphabet + shift <= 25:
                 result += alphabet[idx_alphabet + shift]
             else:
                 result += alphabet[(idx_alphabet + shift) % 26]
-        else:
+
+        elif direction == 'encode' and (letter in alphabet):
             if idx_alphabet - shift < 0:
                 result += alphabet[26 - abs(idx_alphabet - shift)]
             else:
                 result += alphabet[idx_alphabet - shift]
-
-    print(result)
+        else:
+            result += letter
+    print(f"Here's the {direction}d result: {result}")
 
 
 to_cont = True
